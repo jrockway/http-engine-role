@@ -33,6 +33,7 @@ has 'port' => (
     is            => 'ro',
     isa           => PortNumber,
     required      => 1,
+    default       => 3000,
     documentation => 'The port to bind the HTTP server to.',
 );
 
@@ -61,4 +62,3 @@ sub _build_engine {
 }
 
 1;
-
