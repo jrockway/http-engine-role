@@ -1,17 +1,22 @@
 package HTTP::Engine::Role;
 use Moose::Role;
 
-
 use HTTP::Engine;
 require MooseX::Getopt;
 
-use MooseX::Types -declare => ['PortNumber'];
+use MooseX::Types -declare => [qw/PortNumber/];
 use MooseX::Types::Moose 'Int';
+
+# setup useful types
 
 subtype PortNumber,
   as Int,
   where { $_ > 0 && $_ < 65536 },
   message { "The port number must be between 1 and 65536" };
+
+class_type 'HTTP::Engine::Request';
+class_type 'HTTP::Engine::Response';
+class_type 'HTTP::Engine';
 
 use namespace::clean -except => 'meta';
 
