@@ -29,6 +29,14 @@ has '_engine_type' => (
     default => 'ServerSimple',
 );
 
+has 'host' => (
+    is            => 'ro',
+    isa           => 'Str',
+    required      => 1,
+    default       => '0.0.0.0',
+    documentation => 'The local address to bind',
+);
+
 has 'port' => (
     is            => 'ro',
     isa           => PortNumber,
@@ -50,7 +58,7 @@ sub _build_engine {
         interface => {
             module => $self->_engine_type,
             args   => {
-                host => 'localhost',
+                host => $self->host,
                 port => $self->port,
             },
             request_handler => sub {
